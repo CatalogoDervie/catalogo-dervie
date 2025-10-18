@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Catálogo · Dervie Skin Care</title>
+<style>
+  :root{--bg:#f6f4f2;--text:#2b2b2b;--muted:#7b8a82;--primary:#a8c6b4;--primary-dark:#6f9185;--card:#ffffff}
+  *{box-sizing:border-box}
+  body{margin:0;background:#ffffff;color:var(--text);font-family:'Segoe UI',Roboto,Arial,sans-serif;line-height:1.45}
+  header{background:linear-gradient(120deg,#a8c6b4 0%,#f1eee9 100%);color:#2b2b2b;text-align:center;padding:36px 16px}
+  header h1{margin:0;font-size:32px;font-weight:600}
+  header p{margin:8px 0 0;color:#fffefbaf}
+  .badge{background:#fff;color:var(--primary-dark);padding:3px 10px;border-radius:999px;font-weight:600;font-size:12px;margin-left:6px}
+  .container{max-width:1024px;margin:28px auto;padding:0 16px;position:relative;z-index:1}
+  h2.section{margin:26px 0 14px;font-size:22px;color:var(--primary-dark);display:inline-block;border-bottom:3px solid var(--primary);padding-bottom:4px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .card{background:var(--card);border-radius:16px;padding:18px;border:1px solid #eee;box-shadow:0 8px 18px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:8px;min-height:200px}
+  .card h3{margin:0 0 6px;font-size:18px;color:#3a3125}
+  .pill{display:inline-block;background:#eef5f1;border:1px solid #cfe1d9;color:#3d5b4f;padding:2px 8px;border-radius:999px;font-size:12px;margin-right:6px}
+  .price{font-weight:700;color:var(--primary-dark);font-size:18px;margin-top:auto} .promo{margin-top:10px;display:inline-block;background:#e8f1ec;border:1px solid #c7ded3;color:#2c5146;padding:6px 12px;border-radius:999px;font-weight:600;font-size:14px} .slogan{margin-top:6px;color:#3d5b4f;font-weight:600} ul.spec li.price{list-style:none;margin-left:-1em} .promo{margin-top:10px;display:inline-block;background:#e8f1ec;border:1px solid #c7ded3;color:#2c5146;padding:6px 12px;border-radius:999px;font-weight:600;font-size:14px} .slogan{margin-top:6px;color:#3d5b4f;font-weight:600} ul.spec li.price{list-style:none;margin-left:-1em}
+  .muted{color:var(--muted);font-size:13px}
+  ul.spec{margin:8px 0 0 18px}
+  .packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+  .pack{background:#fff;border:1px solid #eee;border-radius:14px;padding:14px}
+  .pack h3{margin:0 0 6px;color:var(--primary-dark)}
+  .total{margin-top:6px;font-size:13px;color:#6a5f4e}
+  footer{margin:36px 0 60px;text-align:center;color:var(--muted);font-size:12px}
+  .page-break{page-break-before:always;margin-top:28px}
+  .fab-stack{position:fixed;right:18px;bottom:24px;display:flex;flex-direction:column;gap:12px;z-index:1000}
+  .fab{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;text-decoration:none;color:#fff;font-weight:700;box-shadow:0 8px 18px rgba(0,0,0,.18)}
+  .fab .ico{width:28px;height:28px;display:block}
+  .fab.wa{background:#25d366}
+  .fab.ig{background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af,#515bd4)}
+.side-art{position:fixed;top:140px;bottom:40px;width:190px;pointer-events:none;z-index:0}
+.side-art.left{left:0;background:
+  radial-gradient(120px 200px at 60% 10%, rgba(169,198,180,.14), transparent 60%),
+  radial-gradient(80px 140px at 30% 40%, rgba(169,198,180,.10), transparent 60%),
+  radial-gradient(100px 160px at 70% 70%, rgba(111,145,133,.08), transparent 60%);
+}
+.side-art.right{right:0;background:
+  radial-gradient(120px 200px at 40% 20%, rgba(169,198,180,.14), transparent 60%),
+  radial-gradient(80px 140px at 70% 45%, rgba(169,198,180,.10), transparent 60%),
+  radial-gradient(100px 160px at 30% 80%, rgba(111,145,133,.08), transparent 60%);
+}
+@media (max-width: 1024px){.side-art{display:none}}
+.filterbar{position:sticky;top:0;background:#ffffffbd;backdrop-filter:saturate(180%) blur(6px);z-index:5;display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid #eee;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.filterbar::-webkit-scrollbar{display:none}
+  .chip{border:none;background:#f2f6f4;color:#3f5b50;padding:8px 12px;border-radius:999px;font-weight:600;cursor:pointer}
+  .chip:hover{background:#e6f0eb}
+  .chip.active{background:#d7e7df;color:#24463b}
+  .filterbar .spacer{flex:1}
+  .filterbar .search{position:relative}
+  .filterbar input[type=search]{padding:8px 32px 8px 10px;border:1px solid #e2e2e2;border-radius:999px;outline:none;width:160px}
+  .filterbar .search svg{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#888}
+@media (max-width: 768px){
+  header{padding:24px 12px}
+  header h1{font-size:26px}
+  .container{max-width:100%;padding:0 12px}
+  .grid{grid-template-columns:1fr;gap:12px}
+  .packs{grid-template-columns:1fr}
+  .card{min-height:auto;padding:14px}
+  .pack{padding:12px}
+  .chip{padding:8px 10px;font-size:13px}
+  .filterbar{gap:8px;padding:8px 10px}
+  .filterbar input[type=search]{width:140px}
+  .fab-stack{right:12px;bottom:16px}
+  .fab{padding:10px 12px;font-size:14px}
+  .fab .ico{width:20px;height:20px}
+}
+@media (max-width: 420px){
+  .filterbar input[type=search]{width:120px}
+}
+html{scroll-behavior:smooth} h2.section{scroll-margin-top:90px}
+</style>
+</head>
+<body>
+  <header id="top">
+    <h1 style="margin:0;font-size:34px;font-weight:600;letter-spacing:.5px">Dervie Skin Care</h1>
+    <p style="margin:8px 0 0;color:#4265588f">Catálogo de higiene, tratamientos e hidratación</p>
+    <p class="slogan">🌿 Fórmulas naturales, sin conservantes.</p>
+    <div class="promo">🎁 10% OFF llevando 2 o más productos</div>
+  </header>
+  <nav class="filterbar container">
+    <a class="chip active" href="#top">Todos</a>
+    <a class="chip" href="#sec-packs">Rutinas</a>
+    <a class="chip" href="#sec-higiene">Higiene</a>
+    <a class="chip" href="#sec-serums">Serums</a>
+    <a class="chip" href="#sec-humectantes">Humectantes</a>
+    <a class="chip" href="#sec-serums">Antioxidantes</a>
+    <a class="chip" href="#sec-serums">Noche</a>
+    <a class="chip" href="#sec-corporales">Corporales</a>
+    <span class="spacer"></span>
+    <div class="search">
+      <input id="q" type="search" placeholder="Buscar... (Enter)"/>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+  </nav>
+  <div class="side-art left"></div>
+  <div class="side-art right"></div>
+  <main class="container">
+    <h2 id="sec-higiene" class="section">Higiene facial</h2>
+    <section class="grid">
+      <div class="card" data-tags="higiene">
+        <h3>Loción termal</h3>
+        <div class="pill">Calma</div> <div class="pill">Piel sensible</div>
+        <ul class="spec">
+          <li>Rocío termal que refresca y desinflama.</li>
+          <li class="price">$ 14.805</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="higiene">
+        <h3>Agua micelar</h3>
+        <div class="pill">Limpieza</div> <div class="pill">Sin enjuague</div>
+        <ul class="spec">
+          <li>Retira maquillaje e impurezas con suavidad.</li>
+          <li class="price">$ 15.960</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="higiene">
+        <h3>Espuma termal</h3>
+        <div class="pill">Limpieza</div> <div class="pill">Todo tipo</div>
+        <ul class="spec">
+          <li>Espuma cremosa, no reseca.</li>
+          <li class="price">$ 21.735</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="higiene">
+        <h3>Espuma oil control</h3>
+        <div class="pill">Piel grasa</div> <div class="pill">Seborreguladora</div>
+        <ul class="spec">
+          <li>Controla brillo y puntos negros.</li>
+          <li class="price">$ 21.735</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2 id="sec-serums" class="section">Serums & tratamientos</h2>
+    <section class="grid">
+      <div class="card" data-tags="serums">
+        <h3>Serum Niacinamida</h3>
+        <div class="pill">Poros</div> <div class="pill">Manchas leves</div>
+        <ul class="spec">
+          <li>Equilibra sebo, mejora textura y enrojecimiento.</li>
+          <li class="price">$ 29.400</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="serums antioxidantes">
+        <h3>Serum Vitamina C + Ácido Hialurónico</h3>
+        <div class="pill">Luminosidad</div> <div class="pill">Anti-oxidante</div>
+        <ul class="spec">
+          <li>Ilumina, unifica tono y aporta hidratación.</li>
+          <li class="price">$ 34.650</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="serums noche">
+        <h3>Despigmentante Soft</h3>
+        <div class="pill">Manchas</div> <div class="pill">Noche</div>
+        <ul class="spec">
+          <li>Atenúa hiperpigmentaciones con suavidad.</li>
+          <li class="price">$ 26.775</li>
+        </ul>
+      </div>
+    
+            <div class="card" data-tags="serums antioxidantes">
+        <h3>Vitamina C shock</h3>
+        <div class="pill">Booster</div> <div class="pill">Luminosidad</div>
+        <ul class="spec">
+          <li>Concentrado antioxidante de efecto luminoso.</li>
+          <li class="price">$ 28.140</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2 id="sec-humectantes" class="section">Hidratantes faciales</h2>
+    <section class="grid">
+      <div class="card" data-tags="humectantes">
+        <h3>Hialcrem</h3>
+        <div class="pill">Ligera</div> <div class="pill">Todo tipo</div>
+        <ul class="spec">
+          <li>Hidratación diaria, absorción rápida.</li>
+          <li class="price">$ 25.725</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="humectantes">
+        <h3>Dermocalmante</h3>
+        <div class="pill">Calma</div> <div class="pill">Sensible</div>
+        <ul class="spec">
+          <li>Reduce rojeces y refuerza barrera.</li>
+          <li class="price">$ 24.360</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="humectantes noche">
+        <h3>Caléndula</h3>
+        <div class="pill">Nutritiva</div> <div class="pill">Noche</div>
+        <ul class="spec">
+          <li>Textura más rica para piel seca.</li>
+          <li class="price">$ 24.360</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="humectantes">
+        <h3>Células madres</h3>
+        <div class="pill">Antiage</div> <div class="pill">+40</div>
+        <ul class="spec">
+          <li>Suaviza líneas finas sin sensación pesada.</li>
+          <li class="price">$ 28.140</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="humectantes">
+        <h3>Rosa Mosqueta</h3>
+        <div class="pill">Regenerante</div> <div class="pill">+50 / seca</div>
+        <ul class="spec">
+          <li>Repara y aporta elasticidad.</li>
+          <li class="price">$ 28.140</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2 id="sec-corporales" class="section">Corporales</h2>
+    <section class="grid">
+      <div class="card" data-tags="corporales">
+        <h3>Emulsión de karité</h3>
+        <div class="pill">Suavidad</div>
+        <ul class="spec">
+          <li>Textura liviana, piel flexible.</li>
+          <li class="price">$ 24.360</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="corporales noche">
+        <h3>Vitamina A shock</h3>
+        <div class="pill">Nutrición</div>
+        <ul class="spec">
+          <li>Ideal noche para zonas resecas.</li>
+          <li class="price">$ 19.740</li>
+        </ul>
+      </div>
+      <div class="card" data-tags="corporales">
+        <h3>Ultrahidratante con urea</h3>
+        <div class="pill">Talones & codos</div>
+        <ul class="spec">
+          <li>Urea intensiva para sequedad profunda.</li>
+          <li class="price">$ 21.735</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="page-break"></div>
+    <h2 id="sec-packs" class="section">Rutinas / Packs recomendados</h2>
+<p class="muted" style="margin:6px 0 12px">Aclaración: <strong>“+25”</strong> en los packs (p. ej., <em>Alternativa +25 · Noche</em>) indica <strong>edad 25 años o más</strong>.</p>
+    <section class="packs">
+      <div class="pack" data-tags="packs">
+        <h3>Joven / mixta (Día/Noche)</h3>
+        <ul>
+          <li>Higiene: Agua micelar</li>
+          <li>Serum Niacinamida</li>
+          <li>Hialcrem</li>
+        </ul>
+        <div class="total"><strong>Precio pack:</strong> $ 71.085 <span class="muted">(higiene simulada: Agua micelar)</span></div>
+      </div>
+      <div class="pack" data-tags="packs">
+        <h3>Alternativa +25 · Día</h3>
+        <ul>
+          <li>Higiene: Agua micelar</li>
+          <li>Serum Vitamina C + Ácido Hialurónico</li>
+          <li>Hialcrem</li>
+        </ul>
+        <div class="total"><strong>Precio pack:</strong> $ 76.335 <span class="muted">(higiene simulada: Agua micelar)</span></div>
+      </div>
+      <div class="pack" data-tags="packs">
+        <h3>Alternativa +25 · Noche</h3>
+        <ul>
+          <li>Serum Niacinamida</li>
+          <li>Hialcrem</li>
+        </ul>
+        <div class="total"><strong>Precio pack:</strong> $ 55.125</div>
+      </div>
+      <div class="pack" data-tags="packs">
+        <h3>Piel grasa / acné</h3>
+        <ul>
+          <li>Espuma oil control</li>
+          <li>Emulsión Sebocontrol</li>
+        </ul>
+        <div class="total"><strong>Precio pack:</strong> $ 47.145</div>
+      </div>
+      <div class="pack" data-tags="packs">
+        <h3>Rosácea / sensible</h3>
+        <ul>
+          <li>Higiene: Agua micelar</li>
+          <li>Serum Niacinamida</li>
+          <li>Dermocalmante (o Caléndula)</li>
+        </ul>
+        <div class="total"><strong>Precio pack:</strong> $ 69.720 <span class="muted">(higiene simulada: Agua micelar)</span></div>
+      </div>
+      <div class="pack" data-tags="packs">
+        <h3>+40 antiage liviana</h3>
+        <ul>
+          <li>Higiene: Agua micelar</li>
+          <li>Niacinamida <em>o</em> Vitamina C</li>
+          <li>Células madres</li>
+        </ul>
+        <div class="total"><strong>Con Niacinamida:</strong> $ 73.500 · <strong>Con Vit C:</strong> $ 78.750</div>
+      </div>
+      <div class="pack" data-tags="packs">
+        <h3>+50 piel seca</h3>
+        <ul>
+          <li>Higiene: Agua micelar</li>
+          <li>Rosa Mosqueta</li>
+        </ul>
+        <div class="total"><strong>Precio pack:</strong> $ 44.100 <span class="muted">(higiene simulada: Agua micelar)</span></div>
+      </div>
+      <div class="pack" data-tags="packs">
+        <h3>Manchas</h3>
+        <ul>
+          <li><strong>Día:</strong> Niacinamida + Hialcrem</li>
+          <li><strong>Noche:</strong> Despigmentante Soft</li>
+        </ul>
+        <div class="total"><strong>Día:</strong> $ 55.125 · <strong>Noche:</strong> $ 26.775 · <strong>Pack completo:</strong> $ 81.900</div>
+      </div>
+      <div class="pack" data-tags="packs">
+        <h3>Corporales</h3>
+        <ul>
+          <li>Emulsión de karité / Vitamina A shock / Ultrahidratante con urea</li>
+        </ul>
+        <div class="total"><strong>Karité + Urea:</strong> $ 46.095 · <strong>Urea + A shock:</strong> $ 41.475</div>
+      </div>
+    </section>
+
+    
+  </main>
+  <div class="fab-stack">
+    <a class="fab wa" href="https://api.whatsapp.com/send?phone=5493425462563&text=Buen%20d%C3%ADa!%20Vengo%20del%20cat%C3%A1logo%20y%20quiero%20asesoramiento%20para%20armar%20mi%20rutina%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp: ¿Cómo te ayudo?" title="¿Cómo te ayudo?">
+      <!-- WhatsApp icon con aro completo y márgenes para evitar cortes -->
+      <svg class="ico" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="12" cy="12" r="10.5" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <path fill="#ffffff" d="M16.54 13.37c-.23-.11-1.34-.65-1.55-.72-.21-.08-.36-.11-.51.11-.15.23-.58.75-.71.9-.13.15-.26.17-.49.06-.23-.11-.99-.36-1.89-1.17-.7-.62-1.23-1.39-1.36-1.63-.13-.23-.01-.36.09-.49.1-.1.23-.27.34-.41.11-.14.15-.23.22-.39s.04-.28-.02-.39c-.06-.11-.5-1.2-.68-1.64-.18-.43-.36-.37-.5-.38h-.43c-.14 0-.36.05-.55.27-.19.21-.74.72-.74 1.76 0 1.04.76 2.05.86 2.19.1.14 1.49 2.28 3.61 3.2.5.22.9.35 1.2.44.5.16.96.15 1.33.09.41-.06 1.25-.51 1.43-1 .18-.49.18-.91.13-.99-.05-.09-.19-.14-.39-.24z"/>
+      </svg>
+    </a>
+    <a class="fab ig" href="https://www.instagram.com/dervieskincare" target="_blank" rel="noopener" aria-label="Instagram: @dervieskincare" title="@dervieskincare">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/>
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+        <circle cx="18" cy="6" r="1.2" fill="currentColor"/>
+      </svg>
+    </a>
+  </div>
+  <script>
+(()=>{
+  const chips=[...document.querySelectorAll('.filterbar .chip')];
+  function setActive(hash){ chips.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===hash)); }
+  chips.forEach(a=>a.addEventListener('click',()=>setActive(a.getAttribute('href'))));
+  const sections=['#top','#sec-packs','#sec-higiene','#sec-serums','#sec-humectantes','#sec-corporales'];
+  if('IntersectionObserver' in window){
+    const obs=new IntersectionObserver(ents=>{
+      ents.forEach(e=>{ if(e.isIntersecting){ const id=e.target.id?`#${e.target.id}`:'#top'; setActive(id);} });
+    },{rootMargin:'-60% 0px -35% 0px',threshold:0.01});
+    const top=document.getElementById('top'); if(top) obs.observe(top);
+    sections.slice(1).forEach(s=>{ const el=document.querySelector(s); if(el) obs.observe(el); });
+  }
+  const q=document.getElementById('q');
+  if(q){
+    q.addEventListener('keydown',ev=>{
+      if(ev.key==='Enter'){
+        const term=q.value.trim().toLowerCase();
+        if(!term) return;
+        const nodes=[...document.querySelectorAll('main h3')];
+        const hit=nodes.find(n=>n.textContent.toLowerCase().includes(term));
+        if(hit) hit.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
